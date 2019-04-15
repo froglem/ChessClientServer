@@ -11,7 +11,7 @@ class MainWindow;
 
 enum class Action : qint8
 {SendNickName, NickNameValid, NickNameInvalid, OpponentDC,
-PlayerList};
+PlayerList, SendGameInvite};
 
 class MainWindow : public QMainWindow
 {
@@ -32,6 +32,7 @@ private slots:
     void connectButton();
     void showUssername();
     void connectionSet();
+    void challange();
 
 signals:
     void ussernameSet();

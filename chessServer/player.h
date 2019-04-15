@@ -3,6 +3,8 @@
 #include <QTcpSocket>
 #include <QString>
 
+enum class gameState{free, inGame, Pending};
+
 class Player
 {
 public:
@@ -16,7 +18,7 @@ public:
 private:
     QTcpSocket *m_playerSocket, *m_opponentSocket{nullptr};
     QString m_playerName{}, m_opponentName{};
-    bool m_inGame{false};
+    gameState m_gameState{gameState::free};
 };
 
 #endif // PLAYER_H

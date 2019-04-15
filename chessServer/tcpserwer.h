@@ -7,7 +7,7 @@
 
 enum class Action : qint8
 {SendNickName, NickNameValid, NickNameInvalid, OpponentDC,
-PlayerList};
+PlayerList, SendGameInvite};
 
 
 namespace Ui {

@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->connectButton, &QPushButton::clicked, this, &MainWindow::connectButton);
+    connect(ui->challangeButton, &QPushButton::clicked, this, &MainWindow::challange);
     connect(this, &MainWindow::ussernameSet, this, &MainWindow::showUssername);
     connect(this, &MainWindow::connected, this, &MainWindow::connectionSet);
     connect(ui->onlineList, &QListWidget::itemSelectionChanged,
@@ -97,5 +98,18 @@ void MainWindow::connectionSet()
 {
     ui->connectButton->setText("Refresh");
     resetOnline();
+}
+
+void MainWindow::challange()
+{
+    bool ok;
+    QDataStream stream(m_socket);
+    stream << static_cast<qint8>(Action::SendGameInvite)
+           << ui->onlineList->selectedItems()[0]->text();
+    ok = m_socket->waitForReadyRead(5000);
+    if(!ok){
+        QMessageBox::information(this, "Error", "Server Connection problem");
+        return;
+    }
 }
 
